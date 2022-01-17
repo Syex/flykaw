@@ -1,10 +1,14 @@
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
+    id("com.vanniktech.maven.publish")
+    signing
 }
 
 kotlin {
-    android()
+    android {
+        publishLibraryVariants("release", "debug")
+    }
 
     iosX64()
     iosArm64()
@@ -52,4 +56,28 @@ android {
         minSdk = 16
         targetSdk = 31
     }
+}
+
+publishing {
+    repositories {
+        val releasesRepoUrl = "https://s01.oss.sonatype.org/content/repositories/releases"
+        val snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+        val repoUrl = uri(if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl)
+
+        maven(url = repoUrl) {
+            authentication {
+                credentials {
+                    username = System.getenv("OSS_SONATYPE_USERNAME")
+                    password = System.getenv("OSS_SONATYPE_PASSWORD")
+                }
+            }
+        }
+    }
+}
+
+signing {
+    val signingPrivateKey = System.getenv("MAVEN_GPG_PRIVATE_KEY")
+    val signingPassword = System.getenv("MAVEN_GPG_PASSPHRASE")
+    useInMemoryPgpKeys(signingPrivateKey, signingPassword)
+    sign(publishing.publications)
 }
