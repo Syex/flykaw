@@ -1,3 +1,5 @@
+import com.vanniktech.maven.publish.SonatypeHost.S01
+
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
@@ -6,7 +8,7 @@ plugins {
 
 kotlin {
     android {
-        publishLibraryVariants("release", "debug")
+        publishAllLibraryVariants()
     }
 
     iosX64()
@@ -57,19 +59,8 @@ android {
     }
 }
 
-publishing {
-    repositories {
-        val releasesRepoUrl = "https://s01.oss.sonatype.org/content/repositories/releases"
-        val snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
-        val repoUrl = uri(if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl)
-
-        maven(url = repoUrl) {
-            authentication {
-                credentials {
-                    username = System.getenv("OSS_SONATYPE_USERNAME")
-                    password = System.getenv("OSS_SONATYPE_PASSWORD")
-                }
-            }
-        }
+plugins.withId("com.vanniktech.maven.publish") {
+    mavenPublish {
+        sonatypeHost = S01
     }
 }
