@@ -2,7 +2,6 @@ plugins {
     kotlin("multiplatform")
     id("com.android.library")
     id("com.vanniktech.maven.publish")
-//    signing
 }
 
 kotlin {
@@ -74,10 +73,3 @@ publishing {
         }
     }
 }
-
-//signing {
-//    val signingPrivateKey = System.getenv("MAVEN_GPG_PRIVATE_KEY")
-//    val signingPassword = System.getenv("MAVEN_GPG_PASSPHRASE")
-//    useInMemoryPgpKeys(signingPrivateKey, signingPassword)
-//    sign(publishing.publications)
-//}
