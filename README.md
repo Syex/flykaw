@@ -1,4 +1,6 @@
 # flykaw
+![](https://github.com/Syex/flykaw/workflows/build/badge.svg?branch=main)
+![](https://img.shields.io/github/v/release/Syex/flykaw)
 
 flykaw is **a** **w**rapper **f**or **y**our **K**otlin **l**ogger, in short *awfykl* or as an anagram _flykaw_.
 
