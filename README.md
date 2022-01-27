@@ -4,6 +4,8 @@
 
 flykaw is **a** **w**rapper **f**or **y**our **K**otlin **l**ogger, in short *awfykl* or as an anagram _flykaw_.
 
+Mostly a playground repository for Kotlin Multiplatform Mobile (KMM) libraries for me, use cases for this should be very rare.
+
 ## Why?
 Imagine you're using [Timber](https://github.com/JakeWharton/timber) and have Timber calls in all your code:
 
